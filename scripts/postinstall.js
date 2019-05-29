@@ -48,11 +48,11 @@ fs.copyFileSync(
   fullInstallPath + '/public-api.ts',
 );
 
-const parsedGitignore = parseGitignore(fs.readFileSync(projectRoot + '/.gitignore'));
+const parsedGitignore = parseGitignore(fs.readFileSync(path.resolve(projectRoot + '/.gitignore')));
 
 if(!parsedGitignore.indexOf(installPath) > -1) {
   console.log('Adding install path to gitignore');
-  fs.appendFileSync(`\n${projectRoot}/.gitignore\n`);
+  fs.appendFileSync(path.resolve(projectRoot + '/.gitignore'), `\n${installPath}\n`);
 }
 
 console.log('Shared Services install complete');
