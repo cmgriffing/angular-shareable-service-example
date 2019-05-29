@@ -16,7 +16,7 @@ console.log('Paths:', {
 });
 
 const sharedJsonPath = path.resolve(projectRoot + '/shared.json');
-const defaultInstallPath = '/src/services/shared';
+const defaultInstallPath = '/src/app/services/shared';
 const defaultFullInstallPath = path.resolve(projectRoot +  defaultInstallPath);
 let installPath = defaultInstallPath;
 let fullInstallPath = defaultFullInstallPath;
@@ -32,7 +32,7 @@ if(fs.existsSync(sharedJsonPath)) {
   // create shared.json if it does not exist
   fs.writeFileSync(sharedJsonPath, JSON.stringify({
     defaultInstallPath
-  }));
+  }, null, 2));
   console.log("shared.json file written to project root. Don't forget to commit this file to your repo.");
 }
 
@@ -40,7 +40,7 @@ if(fs.existsSync(fullInstallPath)) {
   fs.rmdirSync(fullInstallPath);
 }
 
-fs.mkdirSync(fullInstallPath);
+fs.mkdirSync(fullInstallPath, { recursive: true });
 
 fs.copyFileSync(
   libraryRoot + '/public-api.ts',
