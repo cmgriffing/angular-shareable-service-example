@@ -1,4 +1,5 @@
 const fs = require('fs');
+const fsExtra = require('fs-extra');
 const path = require('path');
 
 const parseGitignore = require('parse-gitignore');
@@ -47,6 +48,11 @@ fs.copyFileSync(
   libraryRoot + '/public-api.ts',
   fullInstallPath + '/public-api.ts',
 );
+
+fsExtra.copySync(
+  libraryRoot + '/lib',
+  fullInstallPath + '/lib',
+)
 
 const parsedGitignore = parseGitignore(fs.readFileSync(path.resolve(projectRoot + '/.gitignore')));
 
