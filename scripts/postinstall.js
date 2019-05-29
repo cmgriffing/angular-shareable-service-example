@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const parseGitignore = require('parse-gitignore');
+const rimraf = require('rimraf');
 
 console.log('Starting postinstall for service');
 
@@ -37,7 +38,7 @@ if(fs.existsSync(sharedJsonPath)) {
 }
 
 if(fs.existsSync(fullInstallPath)) {
-  fs.rmdirSync(fullInstallPath);
+  rimraf.sync(fullInstallPath);
 }
 
 fs.mkdirSync(fullInstallPath, { recursive: true });
