@@ -31,7 +31,7 @@ if(fs.existsSync(sharedJsonPath)) {
 } else {
   // create shared.json if it does not exist
   fs.writeFileSync(sharedJsonPath, JSON.stringify({
-    defaultInstallPath
+    installPath: defaultInstallPath
   }, null, 2));
   console.log("shared.json file written to project root. Don't forget to commit this file to your repo.");
 }
@@ -49,7 +49,7 @@ fs.copyFileSync(
 
 const parsedGitignore = parseGitignore(fs.readFileSync(projectRoot + '/.gitignore'));
 
-if(!parsedGitignore.find(installPath)) {
+if(!parsedGitignore.indexOf(installPath) > -1) {
   console.log('Adding install path to gitignore');
   fs.appendFileSync(`\n${projectRoot}/.gitignore\n`);
 }
