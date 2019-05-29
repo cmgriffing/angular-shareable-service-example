@@ -6,4 +6,11 @@ import { Injectable } from '@angular/core';
 export class ShareableServiceService {
 
   constructor() { }
+
+  getWidget() {
+    return {
+      something: "foo"
+    }
+  }
+
 }
